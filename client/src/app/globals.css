@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {  
+  --font-sans: InterVariable, "sans-serif";
+  --color-tdark: #111111;
+  --color-tmedium: #1e1e1e;
+  --color-tlight: #4d4d4d;
+  --color-twhite: #c6cfd7;
+  --color-tblue: #5E98CE;
+  --color-tdeepblue: #3A7FBF;
+  --color-tred: #CE5E60;
+  --color-tpink: #CE5E98;
+  --color-tgreen: #5ECE94;
+  --color-tpurple: #5E60CE;
+  --color-tyellow: #CECC5E;
+}
