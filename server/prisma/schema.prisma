@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:PostgresIsBetter01-1@localhost:3306/taskdb"
+  url      = env("DATABASE_URL")
 }
 
 model Task {
