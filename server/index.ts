@@ -33,8 +33,6 @@ const isTaskRequest = (task: Partial<TaskRequest>): task is TaskRequest => {
 app.get('/tasks', async (_, res) => {
     const tasks = await getTasks();
 
-    console.log(tasks);
-
     res.json(tasks);
 });
 
@@ -64,6 +62,8 @@ app.delete('/tasks/:id', async (req, res) => {
 
     res.status(200).json();
 });
+
+app.get('/', (_, res) => { res.send('Hello World') });
 
 app.listen(port, () => {
     console.log(`Listening on ${port}`);

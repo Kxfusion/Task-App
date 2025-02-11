@@ -9,6 +9,10 @@
     "routes": [
         {
             "src": "/(.*)",
+            "dest": "index.ts"
+        },
+        {
+            "src": "/(.*)",
             "dest": "dist/index.js"
         }
     ]
