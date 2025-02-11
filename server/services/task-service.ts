@@ -3,7 +3,16 @@ import { PrismaClient, Task } from "@prisma/client";
 const db = new PrismaClient();
 
 const getTasks = async () => {
-    return db.task.findMany();
+    return db.task.findMany({
+        orderBy: [
+            {
+                completed: 'asc',
+            },
+            {
+                id: 'asc',
+            },
+        ]
+    });
 };
 
 const updateTask = async (id: number, updatedFields: Partial<Task>) => {

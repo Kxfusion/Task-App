@@ -33,6 +33,8 @@ const isTaskRequest = (task: Partial<TaskRequest>): task is TaskRequest => {
 app.get('/tasks', async (_, res) => {
     const tasks = await getTasks();
 
+    console.log(tasks);
+
     res.json(tasks);
 });
 

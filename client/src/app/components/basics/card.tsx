@@ -32,7 +32,9 @@ export const Card = ({ task }: CardParams) => {
                     query: task
                 }}
             >
-                <div className="font-normal text-sm text-start text-twhite grow">{task.title}</div>
+                <div className="font-normal text-sm text-start text-twhite grow">
+                    {task.completed ? (<s>{task.title}</s>) : task.title}
+                </div>
             </Link>
             <button
                 className="cursor-pointer mr-1.5"

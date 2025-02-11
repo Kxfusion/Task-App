@@ -3,6 +3,9 @@
 import { revalidatePath } from "next/cache";
 import type { Task } from "../types/Task";
 import { isTaskArray } from "../validation/validate-task";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const makeApiCall = async (path: string, method = 'GET', body?: unknown) => {
     const requestOptions: RequestInit = {
@@ -16,7 +19,7 @@ const makeApiCall = async (path: string, method = 'GET', body?: unknown) => {
         requestOptions.body = JSON.stringify(body);
     }
 
-    return fetch(`http://localhost:4444${path}`, requestOptions);
+    return fetch(`${process.env.API_URL}${path}`, requestOptions);
 };
 
 export const getTasks = async () => {
@@ -29,6 +32,7 @@ export const getTasks = async () => {
         }
     
         const tasks = await response.json();
+        console.log(tasks);
     
         if (isTaskArray(tasks)) {
             return tasks;
@@ -51,15 +55,15 @@ export const addTask = async (task: Task) => {
 
     console.log(response);
 
-    revalidatePath('http://localhost:4444');
+    revalidatePath(`${process.env.API_URL}/tasks`);
 };
 
 export const updateTask = async (task: Task) => {
     await makeApiCall(`/tasks/${task.id}`, 'PUT', task);
-    revalidatePath('http://localhost:4444');
+    revalidatePath(`${process.env.API_URL}/tasks`);
 };
 
 export const deleteTask = async (id: number) => {
     await makeApiCall(`/tasks/${id}`, 'DELETE');
-    revalidatePath('http://localhost:4444');
+    revalidatePath(`${process.env.API_URL}/tasks`);
 };
