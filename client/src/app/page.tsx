@@ -4,6 +4,7 @@ import { TaskTable } from "./components/task-table";
 import { getTasks } from "./server/tasks";
 import type { Task } from "./types/Task";
 
+export const dynamic = 'force-dynamic';
 export default async function Dashboard() {
   const tasks = await getTasks();
 
