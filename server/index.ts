@@ -37,7 +37,6 @@ app.get('/tasks', async (_, res) => {
 });
 
 app.post('/tasks', async (req, res) => {
-    console.log(JSON.stringify(req.body));
     if (isTaskRequest(req.body)) {
         await createTask(req.body);
         res.status(200).json();
@@ -52,7 +51,7 @@ app.put('/tasks/:id', async (req, res) => {
         await updateTask(id, req.body);
     }
 
-    res.status(200);
+    res.status(200).json();
 });
 
 app.delete('/tasks/:id', async (req, res) => {
@@ -61,7 +60,7 @@ app.delete('/tasks/:id', async (req, res) => {
         await deleteTask(id);
     }
 
-    res.status(200);
+    res.status(200).json();
 });
 
 app.listen(port, () => {

@@ -1,11 +1,11 @@
 'use client';
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Task } from "../types/Task";
+import type { Task } from "../types/Task";
 import { Button } from "./basics/button";
 import { addTask, updateTask } from "../server/tasks";
-
-type TaskFormParams = { task?: Task };
+import { useSearchParams, useRouter } from "next/navigation";
+import { isTask } from "../validation/validate-task";
 
 const defaultTask: Task = {
     title: '',
@@ -13,16 +13,31 @@ const defaultTask: Task = {
     completed: false
 };
 
-export const TaskForm = ({ task }: TaskFormParams) => {
+export const TaskForm = () => {
+    const params = useSearchParams();
+    const router = useRouter();
+    const task = {
+        id: parseInt(params.get('id') ?? ''),
+        title: params.get('title'),
+        color: params.get('color'),
+        completed: params.get('completed') === 'true' ? true : false,
+    };
+
+    const isValidTask = isTask(task);
+    console.log(isValidTask);
+
     const { handleSubmit, register, formState } = useForm<Task>({
-        defaultValues: task ?? defaultTask,
+        defaultValues: isValidTask ? task : defaultTask,
     });
+
     const onSubmit: SubmitHandler<Task> = data => {
-        if (task) {
+        if (isValidTask) {
             updateTask(data);
         } else {
             addTask(data);
         }
+
+        router.push('/');
     };
 
     const colors = [

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { RightArrow } from "../components/icons/right-arrow";
 import { TaskForm } from "../components/task-form";
+import { Suspense } from "react";
 
 export default function Task() {
     return (
@@ -10,7 +11,9 @@ export default function Task() {
                     <RightArrow />
                 </Link>
             </div>
-            <TaskForm />
+            <Suspense fallback={null}>
+                <TaskForm />
+            </Suspense>
         </div>
     );
 }
