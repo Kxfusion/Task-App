@@ -30,11 +30,11 @@ export const TaskForm = () => {
         defaultValues: isValidTask ? task : defaultTask,
     });
 
-    const onSubmit: SubmitHandler<Task> = data => {
+    const onSubmit: SubmitHandler<Task> = async data => {
         if (isValidTask) {
-            updateTask(data);
+            await updateTask(data);
         } else {
-            addTask(data);
+            await addTask(data);
         }
 
         router.push('/');
